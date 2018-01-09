@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>Home.qml</file>
+        <file>background.jpg</file>
+        <file>MyButton.qml</file>
+        <file>MyGroupBox.qml</file>
+        <file>MyFrame.qml</file>
+        <file>MyTabBar.qml</file>
+        <file>MyTabButton.qml</file>
+        <file>user.png</file>
+        <file>Keg.qml</file>
+        <file>MyProgressBar.qml</file>
+        <file>MyLabel.qml</file>
+        <file>MyComboBox.qml</file>
+        <file>Lobby.qml</file>
+        <file>RoomTile.qml</file>
+        <file>backgroundLobby.jpg</file>
+        <file>EnterWindow.qml</file>
+    </qresource>
+</RCC>
