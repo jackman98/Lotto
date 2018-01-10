@@ -13,7 +13,8 @@ class Sack : public QObject
 public:
     explicit Sack(QObject *parent = nullptr);
 
-    short nextKegs();
+    Q_INVOKABLE short nextKeg();
+    Q_INVOKABLE void shuffle();
 
 signals:
 

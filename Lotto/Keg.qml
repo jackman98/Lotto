@@ -1,22 +1,29 @@
 import QtQuick 2.10
 
-Rectangle {
+Item {
+    id: m
     property int number: 0
-    color: "transparent"
-    border.color: "#F44336"
-    border.width: 4
+    property string color: "#F44336"
     width: 60
     height: 60
-    radius: width / 2
-    Text {
-        id: text
-        text: "%1".arg(number)
-        anchors.fill: parent
-        font.pointSize: Math.max(width / 3, 1)
-        font.capitalization: Font.AllUppercase
-        color: "#F44336"
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        elide: Text.ElideMiddle
+    Rectangle {
+        color: "transparent"
+        border.color: m.color
+        border.width: 4
+        width: m.width
+        height: m.height
+        radius: width / 2
+        Text {
+            id: text
+            text: "%1".arg(number)
+            anchors.fill: parent
+            font.pointSize: Math.max(width / 3, 1)
+            font.capitalization: Font.AllUppercase
+            color: m.color
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            elide: Text.ElideMiddle
+
+        }
     }
 }

@@ -6,7 +6,6 @@
 #include <QMap>
 #include <QObject>
 
-
 class Card : public QObject
 {
     Q_OBJECT
@@ -35,8 +34,6 @@ private:
     QMap<int, int> fillingLines;
     void checkFillingOfLines();
 };
-
-Q_DECLARE_METATYPE(Card *)
 
 
 #endif // CARD_H

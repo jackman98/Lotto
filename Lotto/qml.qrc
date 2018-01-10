@@ -19,6 +19,8 @@
         <file>backgroundLobby.jpg</file>
         <file>EnterWindow.qml</file>
         <file>Game.qml</file>
-        <file>Card1.qml</file>
+        <file>CardDelegate.qml</file>
+        <file>backgroundCard.jpg</file>
+        <file>backgroundGame.jpg</file>
     </qresource>
 </RCC>

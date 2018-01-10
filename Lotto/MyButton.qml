@@ -3,6 +3,8 @@ import QtQuick.Controls 2.3
 
 Button {
     id: control
+    property string colorNoPressed: "#F44336"
+    property string colorPressed: "#E91E63"
     flat: true
     font.pointSize: 20
     font.weight: Font.ExtraBold
@@ -10,10 +12,11 @@ Button {
     //font.letterSpacing: 7
     font.capitalization: Font.AllUppercase
     contentItem: Text {
+        id: txt
         text: control.text
         font: control.font
         opacity: enabled ? 1.0 : 0.3
-        color: control.down ? "#E91E63" : "#F44336"
+        color: control.down ? colorPressed : colorNoPressed
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         elide: Text.ElideMiddle
@@ -26,3 +29,4 @@ Button {
         radius: 2
     }
 }
+
