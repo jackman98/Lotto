@@ -48,9 +48,10 @@ bool Card::setKeg(int value)
     auto coordinates = this->contains(value);
     if (coordinates == qMakePair(-1, -1))
         return false;
-    numbers[coordinates.first][coordinates.second] = -1; //README
 
-    fillingLines[coordinates.first]++;//возможно строчка выше уже не нужна
+    fillingLines[coordinates.first]++;
+
+    checkFillingOfLines();
     return true;
 }
 
