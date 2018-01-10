@@ -5,9 +5,9 @@ ApplicationWindow {
     id: window
     visible: true
     minimumHeight: 600
-    maximumHeight: 600
+//    maximumHeight: 600
     minimumWidth: 900
-    maximumWidth: 900
+//    maximumWidth: 900
 
 //    property int previousX
 //    property int previousY
@@ -17,7 +17,7 @@ ApplicationWindow {
     StackView {
         id: stackView
         anchors.fill: parent
-        initialItem: "EnterWindow.qml"
+        initialItem: "Game.qml"
 
 //        MouseArea {
 //            anchors.fill: parent

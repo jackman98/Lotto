@@ -1,6 +1,6 @@
 #include "card.h"
 
-Card::Card()
+Card::Card(QObject *parent) : QObject(parent)
 {
     numbers.resize(ROWS);
     for(int i(0); i < ROWS; i++) {
@@ -20,6 +20,11 @@ Card::Card(QVector<QVector<int> > numbers)
 QVector<QVector<int> > Card::getNumbers()
 {
     return numbers;
+}
+
+QVector<int> Card::getAllNumbers()
+{
+    return (numbers[0] + numbers[1] + numbers[2]);
 }
 
 void Card::setNumbers(QVector<QVector<int> > numbers_)
@@ -49,12 +54,12 @@ bool Card::setKeg(int value)
     return true;
 }
 
-bool Card::operator==(Card second)
+bool Card::operator==(Card *second)
 {
     int repeating = 0;
     for(int i(0); i < ROWS; i++) {
         for(int j(0); j < COLUMNS; j++) {
-            if (numbers[i][j] != 0 && (second.contains(numbers[i][j]) != qMakePair(-1, -1))) {
+            if (numbers[i][j] != 0 && (second->contains(numbers[i][j]) != qMakePair(-1, -1))) {
                 repeating++;
             }
             if (repeating > 2) return true;

@@ -3,18 +3,21 @@
 #include <cardgeneration.h>
 #include <QDebug>
 #include <player.h>
+#include <QObject>
 
-class CardDistribution
+class CardDistribution : public QObject
 {
+    Q_OBJECT
+
     CardGeneration cardGeneration;
     int amountsOfCards;
 
-    QVector<Card> bank;
+    QVector<Card *> bank;
 
     void fillBank(int amount);
 public:
-    CardDistribution();
-    void appointCardsToPlayer(Player& player);
+    explicit CardDistribution(QObject *parent = nullptr);
+    Q_INVOKABLE void appointCardsToPlayer(Player *player);
 };
 
 #endif // CARDDISTRIBUTION_H

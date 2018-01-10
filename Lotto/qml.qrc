@@ -18,5 +18,7 @@
         <file>RoomTile.qml</file>
         <file>backgroundLobby.jpg</file>
         <file>EnterWindow.qml</file>
+        <file>Game.qml</file>
+        <file>Card.qml</file>
     </qresource>
 </RCC>

@@ -12,7 +12,7 @@ int CardGeneration::countGeneration;
 CardGeneration::CardGeneration()
 {
     countGeneration = QTime::currentTime().msec();
-    qDebug() << "CardGeneration";
+    //qDebug() << "CardGeneration";
 
 }
 
@@ -99,17 +99,18 @@ Card *CardGeneration::getNewCard()
     //showCard(card);
     //    Card *res = new Card();
     //    res->setNumbers(card);
+    //qDebug() << "END";
     return card;
 }
 
 
-void CardGeneration::showCard(Card card)
+void CardGeneration::showCard(Card *card)
 {
     QString str;
     for(int i(0); i < Card::ROWS; i++) {
         for(int j(0); j < Card::COLUMNS; j++) {
-            if (card[i][j] != 0){
-                str += QString::asprintf(" %2d", card[i][j]);
+            if ((*card)[i][j] != 0){
+                str += QString::asprintf(" %2d", (*card)[i][j]);
             }
             else{
                 str += "   ";

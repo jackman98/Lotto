@@ -12,7 +12,7 @@ Rectangle {
         id: text
         text: "%1".arg(number)
         anchors.fill: parent
-        font.pointSize: 20
+        font.pointSize: Math.max(width / 3, 1)
         font.capitalization: Font.AllUppercase
         color: "#F44336"
         horizontalAlignment: Text.AlignHCenter

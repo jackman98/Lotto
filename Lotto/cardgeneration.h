@@ -9,7 +9,7 @@ public:
     CardGeneration();
     Card* getNewCard();
 
-    static void showCard(Card card);
+    static void showCard(Card *card);
 
 private:
     void shuffle_(QVector<int>& arr, int firstIndex = 0, int lastIndex = Card::COLUMNS);
