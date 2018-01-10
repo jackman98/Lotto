@@ -34,13 +34,14 @@ Page {
         id: cd
     }
 
-    Card {
+    Card1 {
+        id: car
         anchors.centerIn: parent
         currentKeg: keg.number
         Component.onCompleted: {
             cd.appointCardsToPlayer(player1)
-            console.log(player1.amountOfCards())
-            console.log(player1.getCard(0))
+            var s = player1.getCard(0).getAllNumbers()
+            car.positions = s.toString().split(",")
         }
     }
 
