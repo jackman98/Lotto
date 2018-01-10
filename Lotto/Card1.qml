@@ -29,7 +29,7 @@ Item {
                     Text {
                         id: value
                         anchors.fill: parent
-                        text: index ? index : ""
+                        text: modelData ? modelData : ""
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                     }
