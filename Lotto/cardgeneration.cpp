@@ -48,36 +48,47 @@ Card *CardGeneration::getNewCard()
     }
 
 
+    QVector<int> freePositions = { 0, 1, 2, 3, 4, 5, 6, 7, 8};
+
     QVector<int> placesOnLastLine;
+
     for (int i(0); i < Card::COLUMNS; i++) {
         if ((*card)[Card::ROWS - 2][i] == 0 && (*card)[Card::ROWS - 3][i] == 0) {
-            //placesOnLastLine.insert(placesOnLastLine.begin(), i);
             placesOnLastLine.push_back(i);
+            freePositions.removeOne(i);
         }
-        else if ((*card)[Card::ROWS - 2][i] == 0 || (*card)[Card::ROWS - 3][i] == 0){
-            placesOnLastLine.push_back(i);
+        else if ((*card)[Card::ROWS - 2][i] != 0 && (*card)[Card::ROWS - 3][i] != 0) {
+            freePositions.removeOne(i);
         }
     }
-    shuffle_(placesOnLastLine, 4, placesOnLastLine.size() - 1);
+    random_shuffle(freePositions.begin(), freePositions.end());
 
-    for(int i(0); i < 5; i++){
-//        qDebug() << i << placesOnLastLine.size();
-        int index = placesOnLastLine[i];
-//        qDebug() << "OK";
-        card->operator [](Card::ROWS - 1)[index] = 1; //the cell is marked
+    while (placesOnLastLine.size() < amountItemInLine) {
+        placesOnLastLine.push_back(freePositions.front());
+        freePositions.pop_front();
     }
     //The game card has market. Filling it next.
+
+    for(int i(0); i < amountItemInLine; i++){
+        int index = placesOnLastLine[i];
+        card->operator [](Card::ROWS - 1)[index] = 1; //the cell is marked
+    }
 
     bool firstTime;
     QVector<int> numbers;
     for (int i(0); i < Card::COLUMNS; i++) {
         firstTime = true;
-        numbers.resize(10);
-        iota(numbers.begin(), numbers.end(), 10 * i);
-        //        for (int k(0); k < 10; k++){
-        //            numbers[k] += k;
-        //        }
-        if (i == Card::COLUMNS - 1){
+
+        //if first line - we have 9 values (1-9)
+        if(i == 0) {
+            numbers.resize(9);
+            iota(numbers.begin(), numbers.end(), 1);
+        }
+        else { //x0-x9
+            numbers.resize(10);
+            iota(numbers.begin(), numbers.end(), 10 * i);
+        }
+        if (i == Card::COLUMNS - 1){ //80-90
             numbers.push_back(90);
         }
         shuffle_(numbers);
@@ -96,9 +107,7 @@ Card *CardGeneration::getNewCard()
         firstTime = true;
         numbers.clear();
     }
-    //showCard(card);
-    //    Card *res = new Card();
-    //    res->setNumbers(card);
+
     //qDebug() << "END";
     return card;
 }

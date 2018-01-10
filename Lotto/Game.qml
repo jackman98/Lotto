@@ -40,7 +40,7 @@ Page {
         Component.onCompleted: {
             cd.appointCardsToPlayer(player1)
             console.log(player1.amountOfCards())
-            console.log(player1.getCard(0))
+            console.log(player1.getCard(1))
         }
     }
 

@@ -26,26 +26,26 @@ int main(int argc, char *argv[])
     //qRegisterMetaType<Player *>("Player *");
     //qRegisterMetaType<Card *>("Card *");
 
-    //Player p1, p2;
-    //CardDistribution dis;
-    //dis.appointCardsToPlayer(p1);
-    //dis.appointCardsToPlayer(p2);
+    Player p1, p2;
+    CardDistribution dis;
+    dis.appointCardsToPlayer(&p1);
+    dis.appointCardsToPlayer(&p2);
 
 
 
-//    qDebug() << "PLAYER1 CARDS: ";
-//    for(Card *card : p1.getCards()) {
-//        qDebug() << card->getAllNumbers();
-//        CardGeneration::showCard(card);
-//        qDebug() << "\n";
-//    }
+    qDebug() << "PLAYER1 CARDS: ";
+    for(Card *card : p1.getCards()) {
+        qDebug() << card->getAllNumbers();
+        CardGeneration::showCard(card);
+        qDebug() << "\n";
+    }
 
-//    qDebug() << "PLAYER2 CARDS: ";
-//    for(Card *card : p2.getCards()) {
-//        qDebug() << card->getAllNumbers();
-//        CardGeneration::showCard(card);
-//        qDebug() << "\n";
-//    }
+    qDebug() << "PLAYER2 CARDS: ";
+    for(Card *card : p2.getCards()) {
+        qDebug() << card->getAllNumbers();
+        CardGeneration::showCard(card);
+        qDebug() << "\n";
+    }
 
     return app.exec();
 }
