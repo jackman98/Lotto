@@ -3,9 +3,10 @@ import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 
 Rectangle {
-    signal cellClicked(int value)
+    signal cellClicked(int value, int index)
     property int currentKeg: -1
     property alias model: rep.model
+    property int indexOfCards: -1
     width: grid.width + 10
     height: grid.height + 10
     border.color: "#000000"
@@ -51,6 +52,9 @@ Rectangle {
                             value.visible = false
                             kegImage.visible = true
                             console.log(keg)
+                            console.log(indexOfCards)
+                            cellClicked(keg, indexOfCards)
+
                         }
                     }
                 }

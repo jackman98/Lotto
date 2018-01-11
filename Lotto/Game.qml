@@ -4,6 +4,44 @@ import GameClasses 1.0
 import QtQuick.Layouts 1.3
 
 Item {
+    Popup {
+        id: startGame
+        width: parent.width
+        height: parent.height
+        dim: true
+        //modal: true
+        focus: true
+        closePolicy: Popup.NoAutoClose
+        background: Rectangle {
+            anchors.fill: parent
+            color: "transparent"
+            MyLabel {
+                id: lbl
+                anchors.fill: parent
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                font.pointSize: 60
+                property int second: 5
+                text: qsTr("Гра розпочнеться через %1".arg(second))
+            }
+        }
+    }
+
+    Timer {
+        id: startGameTimer
+        interval: 1000
+        repeat: true
+
+        onTriggered: {
+            lbl.second--
+            if (lbl.second === 0) {
+                startGame.close()
+                startGameTimer.stop()
+            }
+        }
+
+    }
+
     Sack {
         id: sack
         Component.onCompleted: shuffle()
@@ -22,6 +60,11 @@ Item {
         Image {
             anchors.fill: parent
             source: "/backgroundGame.jpg"
+        }
+
+        Component.onCompleted: {
+            startGame.open()
+            startGameTimer.running = true;
         }
 
         ColumnLayout {
@@ -177,10 +220,10 @@ Item {
 
                 Component.onCompleted: {
                     cd.appointCardsToPlayer(player1)
-//                    console.log(player1.amountOfCards())
-//                    console.log("DDDD:" + player1.getCard(0))
-//                    console.log("DDDD:" + player1.getCard(1))
-//                    console.log("DDDD:" + player1.getCard(2))
+                    //                    console.log(player1.amountOfCards())
+                    //                    console.log("DDDD:" + player1.getCard(0))
+                    //                    console.log("DDDD:" + player1.getCard(1))
+                    //                    console.log("DDDD:" + player1.getCard(2))
                     rep.model = player1.amountOfCards()
                 }
 
@@ -198,9 +241,13 @@ Item {
                     model: player1.amountOfCards()
                     CardDelegate {
                         currentKeg: keg.number
+                        indexOfCards: index
                         model: {
                             var s = player1.getCard(index).getAllNumbers()
                             s.toString().split(",")
+                        }
+                        onCellClicked: {
+                            player1.putKeg(value, index)
                         }
                     }
                 }

@@ -5,9 +5,9 @@ Player::Player(QObject *parent) : QObject(parent)
 
 }
 
-void Player::putKeg(Card *card, int value)
+void Player::putKeg(int value, int index)
 {
-    card->setKeg(value);
+    cards[index]->setKeg(value);
 }
 
 QVector<Card *> Player::getCards()

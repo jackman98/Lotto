@@ -16,7 +16,7 @@ class Player : public QObject
     //поле для отслежения ошибочных нажатий игрока (попытка putKeg *******)
 public:
     explicit Player(QObject *parent = nullptr);
-    Q_INVOKABLE void putKeg(Card *card, int value);
+    Q_INVOKABLE void putKeg(int value, int index);
     Q_INVOKABLE QVector<Card *> getCards();
     Q_INVOKABLE Card *getCard(int index);
     Q_INVOKABLE int amountOfCards();
