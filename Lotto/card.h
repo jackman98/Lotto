@@ -25,14 +25,19 @@ public:
         return numbers[n];
     }
 
-
     bool operator==(Card *second);
     friend QDebug& operator<<(QDebug& os, Card& card);
     enum {ROWS = 3, COLUMNS = 9};
+
+    QPair<bool, bool> isNeedTakePartOfCush(); //first and second lines
+    bool isWinner(); //third line
+
+//signals:
+//    void thirdLineFilled();
 private:
 
     QMap<int, int> fillingLines;
-    void checkFillingOfLines();
+    void controlFillingOfLines();
 };
 
 

@@ -5,6 +5,7 @@
 #include "card.h"
 #include <QDebug>
 #include <sack.h>
+#include <bot.h>
 
 int main(int argc, char *argv[])
 {

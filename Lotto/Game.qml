@@ -37,6 +37,8 @@ Item {
             if (lbl.second === 0) {
                 startGame.close()
                 startGameTimer.stop()
+                keg.number = sack.nextKeg()
+                timer.start()
             }
         }
 
@@ -49,7 +51,12 @@ Item {
 
     Player {
         id: player1
+        onPlayerWon: {
+            console.log("#######STOP###########")
+            timer.stop()
+        }
     }
+
 
     CardDistribution {
         id: cd
@@ -130,7 +137,7 @@ Item {
 
                         Timer {
                             id: timer
-                            interval: 3000
+                            interval: 3750
                             repeat: true
                             onTriggered: {
                                 keg.number = sack.nextKeg()
@@ -192,29 +199,6 @@ Item {
                 }
             }
 
-            //                ColumnLayout {
-            //                    Layout.fillWidth: true
-            //                    MyLabel {
-            //                        id: nickname1
-            //                        text: qsTr("Nickname")
-            //                        Layout.alignment: Qt.AlignHCenter
-            //                    }
-            //                    MyFrame {
-            //                        id: myFrame2
-            //                        implicitWidth: 75
-            //                        implicitHeight: myFrame2.width
-
-            //                        Image {
-            //                            id: image1
-            //                            anchors.fill: parent
-            //                            fillMode: Image.Stretch
-            //                            source: "user.png"
-            //                        }
-            //                    }
-
-            //                }
-            //            }
-
             Column {
                 Layout.alignment: Qt.AlignHCenter
 
@@ -225,15 +209,6 @@ Item {
                     //                    console.log("DDDD:" + player1.getCard(1))
                     //                    console.log("DDDD:" + player1.getCard(2))
                     rep.model = player1.amountOfCards()
-                }
-
-                MyButton {
-                    text: "Start"
-                    colorNoPressed: "#FFEB3B"
-                    onClicked: {
-                        keg.number = sack.nextKeg()
-                        timer.start()
-                    }
                 }
 
                 Repeater {

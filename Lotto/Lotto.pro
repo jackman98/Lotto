@@ -17,7 +17,8 @@ SOURCES += main.cpp \
     carddistribution.cpp \
     cardgeneration.cpp \
     player.cpp \
-    sack.cpp
+    sack.cpp \
+    bot.cpp
 
 RESOURCES += qml.qrc
 
@@ -37,4 +38,5 @@ HEADERS += \
     carddistribution.h \
     cardgeneration.h \
     player.h \
-    sack.h
+    sack.h \
+    bot.h

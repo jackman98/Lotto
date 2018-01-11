@@ -51,10 +51,20 @@ bool Card::setKeg(int value)
 
     fillingLines[coordinates.first]++;
 
-    checkFillingOfLines();
+
     return true;
 }
 
+//void Card::checkFillingOfLines()
+//{
+
+//    //проверка первых двух линий
+
+//    if (fillingLines[ROWS - 1] == 5) {
+//        qDebug() << "GAME OVER";
+
+//    }
+//}
 bool Card::operator==(Card *second)
 {
     int repeating = 0;
@@ -69,10 +79,28 @@ bool Card::operator==(Card *second)
     return false;
 }
 
-void Card::checkFillingOfLines()
+QPair<bool, bool> Card::isNeedTakePartOfCush()
 {
+    bool first = (fillingLines[0] == 5) ? true : false;
+    bool second = (fillingLines[1] == 5) ? true : false;
 
+    controlFillingOfLines();
+    return qMakePair(first, second);
 }
+
+bool Card::isWinner()
+{
+    return fillingLines[2] == 5;
+}
+
+void Card::controlFillingOfLines()
+{
+    for(int i(0); i < Card::ROWS; i++) {
+        if (fillingLines[i] == 5)
+            fillingLines[i]++;
+    }
+}
+
 
 QDebug& operator<< (QDebug& os, Card& card)
 {
