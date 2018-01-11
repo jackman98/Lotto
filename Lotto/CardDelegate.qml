@@ -46,15 +46,16 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        var keg = parseInt(value.text)
-                        if (currentKeg === keg) {
-                            kegImage.number = keg
-                            value.visible = false
-                            kegImage.visible = true
-                            console.log(keg)
-                            console.log(indexOfCards)
-                            cellClicked(keg, indexOfCards)
-
+                        if (kegImage.visible === false) {
+                            var keg = parseInt(value.text)
+                            if (currentKeg === keg) {
+                                kegImage.number = keg
+                                cellClicked(keg, indexOfCards)
+                                value.visible = false
+                                kegImage.visible = true
+                                console.log(keg)
+                                console.log(indexOfCards)
+                            }
                         }
                     }
                 }

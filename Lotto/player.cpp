@@ -5,9 +5,15 @@ Player::Player(QObject *parent) : QObject(parent)
 
 }
 
+Player::Player(int id)
+{
+    IdentProfile = id;
+}
+
 void Player::putKeg(int value, int index)
 {
     cards[index]->setKeg(value);
+    checkFillingOfCard(cards[index]);
 }
 
 QVector<Card *> Player::getCards()
@@ -28,4 +34,22 @@ int Player::amountOfCards()
 void Player::setCards(QVector<Card *> nCards)
 {
     cards = nCards;
+}
+
+void Player::checkFillingOfCard(Card *card)
+{
+    if (card->isWinner()) {
+        qDebug() << "STOP GAME! Player with id " << IdentProfile << "won";
+        emit playerWon();
+        return;
+    }
+    auto fillingOfTwoLines = card->isNeedTakePartOfCush();
+
+    if (fillingOfTwoLines.first){
+        qDebug() << "FIRST LINE";
+    }
+    if (fillingOfTwoLines.second){
+        qDebug() << "SECOND LINE";
+    }
+
 }
