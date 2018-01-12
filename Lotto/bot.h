@@ -5,13 +5,13 @@
 #include <player.h>
 #include <QDebug>
 
-class Bot : private Player
+class Bot : public Player
 {
     Q_OBJECT
 public:
-    explicit Bot();
+    explicit Bot(QObject *parent = nullptr);
 
-    void putKeg(int value, int index);
+    Q_INVOKABLE void putKeg(int value, int index);
 
 signals:
 

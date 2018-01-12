@@ -3,7 +3,9 @@ import QtQuick.Controls 2.3
 import GameClasses 1.0
 import QtQuick.Layouts 1.3
 
-Item {
+Rectangle {
+    id: mainRec
+    anchors.fill: parent
     Popup {
         id: startGame
         width: parent.width
@@ -38,6 +40,8 @@ Item {
                 startGame.close()
                 startGameTimer.stop()
                 keg.number = sack.nextKeg()
+                for(var j = 0; j < 3; j++)
+                    repForBot.itemAt(j).changeCellState()
                 timer.start()
             }
         }
@@ -57,6 +61,14 @@ Item {
         }
     }
 
+    Bot {
+        id: bot
+        onPlayerWon: {
+            console.log("#######STOP BOT WINNER###########")
+            timer.stop()
+        }
+    }
+
 
     CardDistribution {
         id: cd
@@ -64,6 +76,7 @@ Item {
 
     Page {
         anchors.fill: parent
+
         Image {
             anchors.fill: parent
             source: "/backgroundGame.jpg"
@@ -75,8 +88,12 @@ Item {
         }
 
         ColumnLayout {
+            id: mainCol
+            //            width: parent.width
+            //            height: 700
             anchors.fill: parent
             RowLayout {
+                id: gameInfo
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
                 GridLayout {
@@ -137,10 +154,13 @@ Item {
 
                         Timer {
                             id: timer
-                            interval: 3750
+                            interval: 1000
                             repeat: true
+
                             onTriggered: {
                                 keg.number = sack.nextKeg()
+                                for(var j = 0; j < 3; j++)
+                                    repForBot.itemAt(j).changeCellState()
                             }
 
                         }
@@ -199,34 +219,85 @@ Item {
                 }
             }
 
-            Column {
+            RowLayout {
                 Layout.alignment: Qt.AlignHCenter
+                Layout.fillHeight: true
 
-                Component.onCompleted: {
-                    cd.appointCardsToPlayer(player1)
-                    //                    console.log(player1.amountOfCards())
-                    //                    console.log("DDDD:" + player1.getCard(0))
-                    //                    console.log("DDDD:" + player1.getCard(1))
-                    //                    console.log("DDDD:" + player1.getCard(2))
-                    rep.model = player1.amountOfCards()
+                ColumnLayout {
+                    id: playerCards
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+
+
+                    Component.onCompleted: {
+                        cd.appointCardsToPlayer(player1)
+                        //                                        console.log(player1.amountOfCards())
+                        //                    console.log("DDDD:" + player1.getCard(0))
+                        //                    console.log("DDDD:" + player1.getCard(1))
+                        //                    console.log("DDDD:" + player1.getCard(2))
+                        repForPlayer.model = player1.amountOfCards()
+                        console.log(mainCol.height)
+                        console.log(gameInfo.height)
+                        console.log((mainCol.height - gameInfo.height) / 4)
+                    }
+
+
+                    Repeater {
+                        id: repForPlayer
+                        model: player1.amountOfCards()
+                        CardDelegate {
+                            currentKeg: keg.number
+                            indexOfCards: index
+                            size: (mainCol.height - gameInfo.height) / 10
+                            model: {
+                                var s = player1.getCard(index).getAllNumbers()
+                                s.toString().split(",")
+                            }
+                            onCellClicked: {
+                                player1.putKeg(value, index)
+                            }
+                        }
+                    }
                 }
 
-                Repeater {
-                    id: rep
-                    model: player1.amountOfCards()
-                    CardDelegate {
-                        currentKeg: keg.number
-                        indexOfCards: index
-                        model: {
-                            var s = player1.getCard(index).getAllNumbers()
-                            s.toString().split(",")
-                        }
-                        onCellClicked: {
-                            player1.putKeg(value, index)
+                ColumnLayout {
+                    id: botCards
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+
+
+                    Component.onCompleted: {
+                        cd.appointCardsToPlayer(bot)
+                        //                                        console.log(player1.amountOfCards())
+                        //                    console.log("DDDD:" + player1.getCard(0))
+                        //                    console.log("DDDD:" + player1.getCard(1))
+                        //                    console.log("DDDD:" + player1.getCard(2))
+                        repForBot.model = bot.amountOfCards()
+                    }
+
+
+                    Repeater {
+                        id: repForBot
+                        model: bot.amountOfCards()
+                        CardDelegate {
+                            currentKeg: keg.number
+                            indexOfCards: index
+                            size: (mainCol.height - gameInfo.height) / 10
+                            model: {
+                                var s = bot.getCard(index).getAllNumbers()
+                                s.toString().split(",")
+                            }
+                            onCellClicked: {
+                                bot.putKeg(value, index)
+                            }
                         }
                     }
                 }
             }
+
+
         }
 
     }

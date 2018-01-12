@@ -4,19 +4,22 @@ import QtQuick.Layouts 1.3
 
 Rectangle {
     signal cellClicked(int value, int index)
+    signal changeCellState()
     property int currentKeg: -1
     property alias model: rep.model
     property int indexOfCards: -1
-    width: grid.width + 10
-    height: grid.height + 10
+    property int size: 30
+    implicitWidth: grid.width + 10
+    implicitHeight: grid.height + 10
     border.color: "#000000"
     border.width: 2
+
     Image {
         id: background
         anchors.fill: parent
         source: "/backgroundCard.jpg"
     }
-    GridLayout {
+    Grid {
         id: grid
         anchors.centerIn: parent
         columns: 9
@@ -24,7 +27,12 @@ Rectangle {
             id: rep
             model: s
             Rectangle {
-                width: 30
+                id: cell
+                property alias valueV: value.text
+                property alias visibleV: value.visible
+                property alias visibleK: kegImage.visible
+                property alias numberK: kegImage.number
+                width: size
                 height: width
                 color: "transparent"
                 border.color: "#000000"
@@ -35,6 +43,7 @@ Rectangle {
                     text: modelData != 0 ? modelData : ""
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
+                    font.pointSize: kegImage.fontSize
                 }
                 Keg {
                     id: kegImage
@@ -62,5 +71,20 @@ Rectangle {
             }
         }
     }
+    onChangeCellState: {
+        for(var i = 0; i < 27; i++) {
+            var keg = parseInt(rep.itemAt(i).valueV)
+            //console.log(currentKeg)
+            //console.log(keg)
+            if (currentKeg === keg) {
+                rep.itemAt(i).visibleV = false
+                rep.itemAt(i).numberK = keg
+                cellClicked(keg, indexOfCards)
+                rep.itemAt(i).visibleK = true
+                break
+            }
+        }
+    }
 }
+
 

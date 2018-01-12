@@ -4,6 +4,7 @@ Item {
     id: m
     property int number: 0
     property string color: "#F44336"
+    property alias fontSize: text.font.pointSize
     width: 60
     height: 60
     Rectangle {

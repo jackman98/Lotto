@@ -1,6 +1,6 @@
 #include "bot.h"
 
-Bot::Bot()
+Bot::Bot(QObject *parent) : Player(parent)
 {
 
 }
@@ -8,6 +8,7 @@ Bot::Bot()
 void Bot::putKeg(int value, int index)
 {
     for(int i(0); i < 3; i++) {
-        cards[index]->setKeg(value);
+        cards[i]->setKeg(value);
+        checkFillingOfCard(cards[i]);
     }
 }

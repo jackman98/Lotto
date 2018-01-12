@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<Card>("GameClasses", 1, 0, "Card");
     qmlRegisterType<Player>("GameClasses", 1, 0, "Player");
+    qmlRegisterType<Bot>("GameClasses", 1, 0, "Bot");
     qmlRegisterType<Sack>("GameClasses", 1, 0, "Sack");
     qmlRegisterType<CardDistribution>("GameClasses", 1, 0, "CardDistribution");
 

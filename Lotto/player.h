@@ -13,6 +13,7 @@ class Player : public QObject
     bool isReElectionable;
 protected:
     QVector<Card *> cards;
+    void checkFillingOfCard(Card *card); //README
     //поле для отслежения ошибочных нажатий игрока (попытка putKeg *******)
 public:
     explicit Player(QObject *parent = nullptr);
@@ -26,7 +27,6 @@ public:
 signals:
     void playerWon();
 private:
-    void checkFillingOfCard(Card *card); //README
 };
 
 #endif // PLAYER_H
