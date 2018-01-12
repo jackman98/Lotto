@@ -49,22 +49,14 @@ bool Card::setKeg(int value)
     if (coordinates == qMakePair(-1, -1))
         return false;
 
+    numbers[coordinates.first][coordinates.second] = -1;
     fillingLines[coordinates.first]++;
 
 
     return true;
 }
 
-//void Card::checkFillingOfLines()
-//{
 
-//    //проверка первых двух линий
-
-//    if (fillingLines[ROWS - 1] == 5) {
-//        qDebug() << "GAME OVER";
-
-//    }
-//}
 bool Card::operator==(Card *second)
 {
     int repeating = 0;
@@ -90,7 +82,9 @@ QPair<bool, bool> Card::isNeedTakePartOfCush()
 
 bool Card::isWinner()
 {
-    return fillingLines[2] == 5;
+    bool result = fillingLines[2] == 5;
+    controlFillingOfLines();
+    return result;
 }
 
 void Card::controlFillingOfLines()

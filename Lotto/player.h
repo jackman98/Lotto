@@ -9,9 +9,9 @@ class Player : public QObject
 {
     Q_OBJECT
 
-    int IdentProfile; //money
     bool isReElectionable;
 protected:
+    int IdentProfile; //money
     QVector<Card *> cards;
     void checkFillingOfCard(Card *card); //README
     //поле для отслежения ошибочных нажатий игрока (попытка putKeg *******)

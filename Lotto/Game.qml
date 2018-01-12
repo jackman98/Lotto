@@ -4,6 +4,7 @@ import GameClasses 1.0
 import QtQuick.Layouts 1.3
 
 Rectangle {
+    property int msecForTimer: 500
     id: mainRec
     anchors.fill: parent
     Popup {
@@ -154,7 +155,7 @@ Rectangle {
 
                         Timer {
                             id: timer
-                            interval: 1000
+                            interval: msecForTimer
                             repeat: true
 
                             onTriggered: {

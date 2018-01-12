@@ -71,16 +71,19 @@ Rectangle {
             }
         }
     }
+
     onChangeCellState: {
-        for(var i = 0; i < 27; i++) {
-            var keg = parseInt(rep.itemAt(i).valueV)
+        for(var i = 0; i < 3; i++) {
+            var indexColumn = currentKeg / 10
+            if (indexColumn === 9) indexColumn--
+            var keg = parseInt(rep.itemAt(i * 9 + indexColumn).valueV)
             //console.log(currentKeg)
             //console.log(keg)
             if (currentKeg === keg) {
-                rep.itemAt(i).visibleV = false
-                rep.itemAt(i).numberK = keg
+                rep.itemAt(i * 9 + indexColumn).visibleV = false
+                rep.itemAt(i * 9 + indexColumn).numberK = keg
                 cellClicked(keg, indexOfCards)
-                rep.itemAt(i).visibleK = true
+                rep.itemAt(i * 9 + indexColumn).visibleK = true
                 break
             }
         }

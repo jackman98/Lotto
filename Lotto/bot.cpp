@@ -2,7 +2,7 @@
 
 Bot::Bot(QObject *parent) : Player(parent)
 {
-
+    IdentProfile = 0;
 }
 
 void Bot::putKeg(int value, int index)
