@@ -76,23 +76,22 @@ QPair<bool, bool> Card::isNeedTakePartOfCush()
     bool first = (fillingLines[0] == 5) ? true : false;
     bool second = (fillingLines[1] == 5) ? true : false;
 
-    controlFillingOfLines();
+    controlFillingOfLines(0);
+    controlFillingOfLines(1);
     return qMakePair(first, second);
 }
 
 bool Card::isWinner()
 {
     bool result = fillingLines[2] == 5;
-    controlFillingOfLines();
+    controlFillingOfLines(2);
     return result;
 }
 
-void Card::controlFillingOfLines()
+void Card::controlFillingOfLines(int indexOfCard)
 {
-    for(int i(0); i < Card::ROWS; i++) {
-        if (fillingLines[i] == 5)
-            fillingLines[i]++;
-    }
+        if (fillingLines[indexOfCard] == 5)
+            fillingLines[indexOfCard]++;
 }
 
 

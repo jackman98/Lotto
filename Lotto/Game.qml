@@ -4,7 +4,7 @@ import GameClasses 1.0
 import QtQuick.Layouts 1.3
 
 Rectangle {
-    property int msecForTimer: 500
+    property int msecForTimer: 3000
     id: mainRec
     anchors.fill: parent
     Popup {

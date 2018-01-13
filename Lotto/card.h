@@ -37,7 +37,7 @@ public:
 private:
 
     QMap<int, int> fillingLines;
-    void controlFillingOfLines();
+    void controlFillingOfLines(int indexOfCard);
 };
 
 

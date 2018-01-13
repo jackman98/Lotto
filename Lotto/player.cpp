@@ -38,6 +38,7 @@ void Player::setCards(QVector<Card *> nCards)
 
 void Player::checkFillingOfCard(Card *card)
 {
+
     if (card->isWinner()) {
         qDebug() << "STOP GAME! Player with id " << IdentProfile << "won";
         emit playerWon();
